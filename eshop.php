@@ -23,15 +23,15 @@ class Product {
         return $this->productClass;
     }
 
-    public function addproduct(product $nomeProduct) {
-        $this->products[] = $nomeProduct;
+    public function addproduct(product $nameProduct) {
+        $this->products[] = $nameProduct;
     }
 
     public function getproducts() {
         return $this->products;
     }
 
-    public function removeproduct(product $nomeProduct) {
+    public function removeproduct(product $nameProduct) {
         // dovremmo fare l'unset di una gallina nell'array
         // a partire dalla sua key -> primo step, trovare la key della gallina 
 
@@ -39,7 +39,7 @@ class Product {
 
         
         // unset($array[$key])
-        $keyproductToRemove = array_search($nomeProduct, $this->products);
+        $keyproductToRemove = array_search($nameProduct, $this->products);
 
         // verifichiamo che l'producte già esista all'interno dell'array
         // quindi, in parole povere, che $keyproductToRemove non sia false.
