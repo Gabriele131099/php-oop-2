@@ -3,35 +3,19 @@
 class EShop {
     public $name;
     public $partIva;
-    public $product= [];
+    public $products= [];
     // mettiamo una lista di prodotti
     
-    
-}
-
-// ---------------------------------------------
-
-class Product {
-    protected $label = 'prodotto generico'; 
-
-    protected $productClass;
-    public function getLabel() {
-        return $this->label;
-    }
-
-    public function getproductClass() {
-        return $this->productClass;
-    }
-
-    public function addproduct(product $nameProduct) {
+     // Metodo dello Shop
+     public function addproduct(Product $nameProduct) {
         $this->products[] = $nameProduct;
     }
-
+    // Metodo dello shop
     public function getproducts() {
         return $this->products;
     }
-
-    public function removeproduct(product $nameProduct) {
+    // Metodo dello shop
+    public function removeproduct(Product $nameProduct) {
         // dovremmo fare l'unset di una gallina nell'array
         // a partire dalla sua key -> primo step, trovare la key della gallina 
 
@@ -59,37 +43,104 @@ class Product {
     }
 }
 
-class TechProduct extends Product {
-    public $ram = '8GB';
-    public $ssd = '512GB SSD';
-    public $processore = 'i7 hakuna matata';
+// ---------------------------------------------
 
-    public function __construct()
+class Product {
+    protected $label; 
+    protected $productClass;
+    protected $price;
+    protected $thumb;
+   
+    public function __construct($label, $marca,$price , $thumb ) {
+        $this->label = $label;
+        $this->productClass = $marca;
+        $this->price = $price;
+        $this->thumb = $thumb;
+       
+    }
+
+    public function getLabel() {
+        return $this->label;
+    }
+
+    public function getproductClass() {
+        return $this->productClass;
+    }
+    public function getPrice() {
+        return $this->price;
+    }
+    public function getThumb(){
+        return $this->thumb;
+    }
+
+    
+}
+
+class TechProduct extends Product {
+    public $ram;
+    public $hardDisk;
+    public $processore;
+    
+   
+    public function __construct($label, $marca, $price, $thumb)
     {
-        $this->label = 'asus vivobook';
-        $this->productClass = 'asus';
+        parent::__construct($label, $marca,$price, $thumb);
+        $this->ram = $ram;
+        $this->hardDisk = $hardDisk;
+        $this->processore = $processore;
     }
 }
 
+
 class BeautyProduct extends Product {
-
-    public $materiale = 'stoffa';
-    public $dimensioni = '40cmx30cm';
-    public $imbottitura = 'gomma';
-
-    public function __construct()
+    public $materiale;
+    public $dimensioni;
+    public $imbottitura;
+    
+   
+    public function __construct($label, $marca, $price, $thumb)
     {
-        $this->label = 'cover asus vivobook';
-        $this->productClass = 'carpisa';
+        parent::__construct($label, $marca,$price, $thumb);
+        $this->materiale = $materiale;
+        $this->dimensioni = $dimensioni;
+        $this->imbottitura = $imbottitura;
     }
 }
 
 // ---------------------------------------------
 
 class User {
+    protected $sconto=0;
+    protected $name; 
+    protected $lastname;
+    protected $card;
+    protected $dataCard;
+    protected $plane;
+    
+    public function __construct($name, $lastname,$card , $dataCard, $plane ) {
+        $this->name = $name;
+        $this->lastname = $lastname;
+        $this->card = $card;
+        $this->dataCard = $dataCard;
+       $this->plane = $plane;
+    }
 
-    public $sconto = 0;
+    public function getUser() {
+        return $this->name ;        
+    }
 
+    public function getLastname() {
+        return $this->lastname;
+    }
+    public function getCard() {
+        return $this->card;
+    }
+    public function getDatacard(){
+        return  $this->dataCard;
+    }
+    public function getPlane(){
+        return $this->plane;
+    }
 }
 
 class PremiumUser {
@@ -97,9 +148,38 @@ class PremiumUser {
     // qui dentro potrebbe avere la definizione di una percentuale di 
     // sconto per ogni prodotto.
     public $sconto = 50;
+    protected $name; 
+    protected $lastname;
+    protected $card;
+    protected $dataCard;
+    protected $plane;
+    
+    public function __construct($name, $lastname,$card , $dataCard, $plane ) {
+        $this->name = $name;
+        $this->lastname = $lastname;
+        $this->card = $card;
+        $this->dataCard = $dataCard;
+       $this->plane = $plane;
+    }
 
+    public function getUser() {
+        return $this->name ;        
+    }
 
+    public function getLastname() {
+        return $this->lastname;
+    }
+    public function getCard() {
+        return $this->card;
+    }
+    public function getDatacard(){
+        return  $this->dataCard;
+    }
+    public function getPlane(){
+        return $this->plane;
+    }
 }
+
 
 
 
@@ -119,5 +199,15 @@ class PremiumUser {
 
 
 */ 
-$productPrint = new BeautyProduct("materiale","label" );
-echo $productPrint;
+$productBeauty = new BeautyProduct("Borsa Asus Vivobook","Carpisa", "3,99$", "./borsaVivoBook.jpg");
+echo $productBeauty->getlabel().' - '.$productBeauty->getproductClass().'<br> Prezzo: '.$productBeauty->getPrice()."<img width='250px' src='{$productBeauty->getThumb()}' alt='error'><br>";
+
+// var_dump($product); 
+$productTech = new TechProduct("Asus Vivobook","asus", "399$", "./asusVivoBook.jpg");
+echo $productTech->getlabel().' - '.$productTech->getproductClass().'<br> Prezzo: '.$productTech->getPrice()."<img width='250px' src='{$productTech->getThumb()}' alt='error'><br>";
+$user = new User ("Mario","Rossi","4986-8381-6736-1982","07/2030", "Base");
+echo $user->getUser().' - '.$user->getLastname().'<br> Numero carta : '.$user->getCard()."   Scadenza carta : ".$user->getDatacard()."<br> Piano:{$user->getPlane()} <br>";
+$usera = new PremiumUser ("Luigi","Brambilla","4986-8381-6736-1982","07/2030", "Pro");
+echo $usera->getUser().' - '.$usera->getLastname().'<br> Numero carta : '.$usera->getCard()."   Scadenza carta : ".$usera->getDatacard()."<br> Piano:{$usera->getPlane()} <br>";
+
+?>
