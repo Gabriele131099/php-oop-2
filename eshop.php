@@ -5,11 +5,7 @@ class EShop {
     public $partIva;
     public $product= [];
     // mettiamo una lista di prodotti
-    public function __construct(string $nomeProduct, string $partitaIva)
-    {
-        $this->name = $nomeProduct;
-        $this->partIva = $partitaIva;   
-    }
+    
     
 }
 
@@ -63,7 +59,7 @@ class Product {
     }
 }
 
-Class TechProduct extends Product {
+class TechProduct extends Product {
     public $ram = '8GB';
     public $ssd = '512GB SSD';
     public $processore = 'i7 hakuna matata';
@@ -75,7 +71,8 @@ Class TechProduct extends Product {
     }
 }
 
-Class BeautyProduct extends Product {
+class BeautyProduct extends Product {
+
     public $materiale = 'stoffa';
     public $dimensioni = '40cmx30cm';
     public $imbottitura = 'gomma';
@@ -122,4 +119,5 @@ class PremiumUser {
 
 
 */ 
-?>
+$productPrint = new BeautyProduct("materiale","label" );
+echo $productPrint;
